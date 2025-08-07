@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>FhG IIS DisCoGAN</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="assets/css/Article-Clean.css">
+    <link rel="stylesheet" href="assets/css/trackswitch.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://cdn.rawgit.com/download/polymer-cdn/1.5.0/lib/webcomponentsjs/webcomponents-lite.min.js"></script>
+</head>
+
+<body>
+    <div class="article-clean">
+        <div class="container">
+            <div class="row">
+                <div class="text">
+                    <div class="intro", style="text-align: center">
+                        <h1 class="text-center"><br><br>GAN-Based Speech Enhancement for Low SNR Using Latent Feature Conditioning<br></h1>
+                        <h5 class="text-center"><i> Shrishti Saha Shetu, Emanu&#235;l A. P. Habets, Andreas Brendel</i> <br><br></h5>
+                        <a href="https://www.iis.fraunhofer.de/en/ff/amm.html"> <img src="./assets/img/fhg_iis_logo.png" alt="FhG_IIS" width="240" height="77" ></img></a>
+                        <h5 class="text-center"> Fraunhofer IIS, Am Wolfsmantel 33, 91058 Erlangen, Germany</h5>
+                        <p class="text-center"><i>{shrishti.saha.shetu, emanuel.habets, andreas.brendel}@iis.fraunhofer.de</i> <br></p>
+                        <p class="text-center"> </p>
+                    </div>
+                    <div class="text">
+                        <h2>Abstract</h2>
+                        <p class="text-justify"> Enhancing speech quality under adverse SNR conditions remains a significant challenge for discriminative deep neural network (DNN)-based approaches. 
+                            In this work, we propose DisCoGAN, which is a time-frequency-domain generative adversarial network (GAN) conditioned by the latent features of a discriminative model pre-trained for 
+                            speech enhancement in low SNR scenarios. Our proposed method achieves superior performance compared to state-of-the-arts discriminative methods and also surpasses end-to-end (E2E)
+                            trained GAN models. We also investigate the impact of various configurations for conditioning the proposed GAN model with the discriminative model and 
+                            assess their influence on enhancing speech quality.<br></p>
+                        <figure></figure>
+                        <p></p>
+                    </div>
+                    <div id="Methods"></div>
+                    <div class="text">
+                    <h2>Evaluation Scenarios</h2>
+                        <p>In our work, we evaluate our proposed method with different SOTA generative and discriminative deep learning-based noise reduction methods in various SNR scenraios.<br> <br>
+
+                            Following you can find some processed samples with different Methods:
+                            <h2>1. Low SNR Dataset <a href="#LowSNR"> --> Go to the samples</a></h2> 
+                            <h2>2. VCTK Dataset <a href="#VCTK Dataset"> --> Go to the samples</a></h2> 
+
+                          <br>
+            <div id="LowSNR"></div>
+            <h2>1. Low SNR Dataset</h2>
+                        
+                    </p>
+                    <h5>Item 1 (SNR: -4dB, Speaker: Female)</h5>
+                    <p>
+                        <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samples/clean_fileid_201_*2-108766-A-9*_snr-4_tl-20_fileid_681.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DCCRN"</sub> >
+                                  <ts-source src="./samples/clean_fileid_201_*2-108766-A-9*_snr-4_tl-20_fileid_681.wav/dccrn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DDAEC">
+                                <ts-source src="./samples/clean_fileid_201_*2-108766-A-9*_snr-4_tl-20_fileid_681.wav/ddaec_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="FullSubNet+">
+                                  <ts-source src="./samples/clean_fileid_201_*2-108766-A-9*_snr-4_tl-20_fileid_681.wav/fullsubnetplus_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="CRN">
+                                  <ts-source src="./samples/clean_fileid_201_*2-108766-A-9*_snr-4_tl-20_fileid_681.wav/crn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN">
+                                <ts-source src="./samples/clean_fileid_201_*2-108766-A-9*_snr-4_tl-20_fileid_681.wav/discogan.mp3"></ts-source>
+                            </ts-track>
+                              <ts-track title="NoCoGAN">
+                                <ts-source src="./samples/clean_fileid_201_*2-108766-A-9*_snr-4_tl-20_fileid_681.wav/nocogan.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="FreqCodec-SE">
+                                <ts-source src="./samples/clean_fileid_201_*2-108766-A-9*_snr-4_tl-20_fileid_681.wav/freqcodec.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="SEANet">
+                                <ts-source src="./samples/clean_fileid_201_*2-108766-A-9*_snr-4_tl-20_fileid_681.wav/seanet.mp3"></ts-source>
+                            </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samples/clean_fileid_201_*2-108766-A-9*_snr-4_tl-20_fileid_681.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+
+                    </p>
+                    <h5>Item 2 (SNR: -9dB, Speaker: Male)</h5>
+                    <p>
+                         <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samples/clean_fileid_0_*1-77160-A-3*_snr-9_tl-20_fileid_869.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DCCRN"</sub> >
+                                  <ts-source src="./samples/clean_fileid_0_*1-77160-A-3*_snr-9_tl-20_fileid_869.wav/dccrn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DDAEC">
+                                <ts-source src="./samples/clean_fileid_0_*1-77160-A-3*_snr-9_tl-20_fileid_869.wav/ddaec_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="FullSubNet+">
+                                  <ts-source src="./samples/clean_fileid_0_*1-77160-A-3*_snr-9_tl-20_fileid_869.wav/fullsubnetplus_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="CRN">
+                                  <ts-source src="./samples/clean_fileid_0_*1-77160-A-3*_snr-9_tl-20_fileid_869.wav/crn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN">
+                                <ts-source src="./samples/clean_fileid_0_*1-77160-A-3*_snr-9_tl-20_fileid_869.wav/discogan.mp3"></ts-source>
+                            </ts-track>
+                              <ts-track title="NoCoGAN">
+                                <ts-source src="./samples/clean_fileid_0_*1-77160-A-3*_snr-9_tl-20_fileid_869.wav/nocogan.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="FreqCodec-SE">
+                                <ts-source src="./samples/clean_fileid_0_*1-77160-A-3*_snr-9_tl-20_fileid_869.wav/freqcodec.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="SEANet">
+                                <ts-source src="./samples/clean_fileid_0_*1-77160-A-3*_snr-9_tl-20_fileid_869.wav/seanet.mp3"></ts-source>
+                            </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samples/clean_fileid_0_*1-77160-A-3*_snr-9_tl-20_fileid_869.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+
+                    </p>
+                    <h5>Item 3 (SNR: -15dB, Speaker: Female)</h5>
+                    <p>
+                    <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samples/clean_fileid_156_*5-243025-A-25*_snr-15_tl-26_fileid_82.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DCCRN"</sub> >
+                                  <ts-source src="./samples/clean_fileid_156_*5-243025-A-25*_snr-15_tl-26_fileid_82.wav/dccrn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DDAEC">
+                                <ts-source src="./samples/clean_fileid_156_*5-243025-A-25*_snr-15_tl-26_fileid_82.wav/ddaec_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="FullSubNet+">
+                                  <ts-source src="./samples/clean_fileid_156_*5-243025-A-25*_snr-15_tl-26_fileid_82.wav/fullsubnetplus_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="CRN">
+                                  <ts-source src="./samples/clean_fileid_156_*5-243025-A-25*_snr-15_tl-26_fileid_82.wav/crn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN">
+                                <ts-source src="./samples/clean_fileid_156_*5-243025-A-25*_snr-15_tl-26_fileid_82.wav/discogan.mp3"></ts-source>
+                            </ts-track>
+                              <ts-track title="NoCoGAN">
+                                <ts-source src="./samples/clean_fileid_156_*5-243025-A-25*_snr-15_tl-26_fileid_82.wav/nocogan.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="FreqCodec-SE">
+                                <ts-source src="./samples/clean_fileid_156_*5-243025-A-25*_snr-15_tl-26_fileid_82.wav/freqcodec.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="SEANet">
+                                <ts-source src="./samples/clean_fileid_156_*5-243025-A-25*_snr-15_tl-26_fileid_82.wav/seanet.mp3"></ts-source>
+                            </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samples/clean_fileid_156_*5-243025-A-25*_snr-15_tl-26_fileid_82.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+
+                    </p>
+                    <h5>Item 4 (SNR: -2dB, Speaker: Male)</h5>
+                    <p>
+                             <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samples/clean_fileid_26_*1-97793-A-31*_snr-2_tl-33_fileid_341.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DCCRN"</sub> >
+                                  <ts-source src="./samples/clean_fileid_26_*1-97793-A-31*_snr-2_tl-33_fileid_341.wav/dccrn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DDAEC">
+                                <ts-source src="./samples/clean_fileid_26_*1-97793-A-31*_snr-2_tl-33_fileid_341.wav/ddaec_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="FullSubNet+">
+                                  <ts-source src="./samples/clean_fileid_26_*1-97793-A-31*_snr-2_tl-33_fileid_341.wav/fullsubnetplus_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="CRN">
+                                  <ts-source src="./samples/clean_fileid_26_*1-97793-A-31*_snr-2_tl-33_fileid_341.wav/crn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN">
+                                <ts-source src="./samples/clean_fileid_26_*1-97793-A-31*_snr-2_tl-33_fileid_341.wav/discogan.mp3"></ts-source>
+                            </ts-track>
+                              <ts-track title="NoCoGAN">
+                                <ts-source src="./samples/clean_fileid_26_*1-97793-A-31*_snr-2_tl-33_fileid_341.wav/nocogan.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="FreqCodec-SE">
+                                <ts-source src="./samples/clean_fileid_26_*1-97793-A-31*_snr-2_tl-33_fileid_341.wav/freqcodec.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="SEANet">
+                                <ts-source src="./samples/clean_fileid_26_*1-97793-A-31*_snr-2_tl-33_fileid_341.wav/seanet.mp3"></ts-source>
+                            </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samples/clean_fileid_26_*1-97793-A-31*_snr-2_tl-33_fileid_341.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+                    </p>
+                      <h5>Item 5 (SNR: -2dB, Speaker: Male)</h5>
+                    <p>
+                   <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samples/clean_fileid_38_*1-101296-A-19*_snr-2_tl-20_fileid_505.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DCCRN"</sub> >
+                                  <ts-source src="./samples/clean_fileid_38_*1-101296-A-19*_snr-2_tl-20_fileid_505.wav/dccrn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DDAEC">
+                                <ts-source src="./samples/clean_fileid_38_*1-101296-A-19*_snr-2_tl-20_fileid_505.wav/ddaec_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="FullSubNet+">
+                                  <ts-source src="./samples/clean_fileid_38_*1-101296-A-19*_snr-2_tl-20_fileid_505.wav/fullsubnetplus_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="CRN">
+                                  <ts-source src="./samples/clean_fileid_38_*1-101296-A-19*_snr-2_tl-20_fileid_505.wav/crn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN">
+                                <ts-source src="./samples/clean_fileid_38_*1-101296-A-19*_snr-2_tl-20_fileid_505.wav/discogan.mp3"></ts-source>
+                            </ts-track>
+                              <ts-track title="NoCoGAN">
+                                <ts-source src="./samples/clean_fileid_38_*1-101296-A-19*_snr-2_tl-20_fileid_505.wav/nocogan.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="FreqCodec-SE">
+                                <ts-source src="./samples/clean_fileid_38_*1-101296-A-19*_snr-2_tl-20_fileid_505.wav/freqcodec.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="SEANet">
+                                <ts-source src="./samples/clean_fileid_38_*1-101296-A-19*_snr-2_tl-20_fileid_505.wav/seanet.mp3"></ts-source>
+                            </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samples/clean_fileid_38_*1-101296-A-19*_snr-2_tl-20_fileid_505.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+                    </p>
+                      <h5>Item 6 (SNR: -19dB, Speaker: Male)</h5>
+                    <p>
+                    <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samples/clean_fileid_9_*5-207811-A-35*_snr-19_tl-20_fileid_219.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DCCRN"</sub> >
+                                  <ts-source src="./samples/clean_fileid_9_*5-207811-A-35*_snr-19_tl-20_fileid_219.wav/dccrn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DDAEC">
+                                <ts-source src="./samples/clean_fileid_9_*5-207811-A-35*_snr-19_tl-20_fileid_219.wav/ddaec_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="FullSubNet+">
+                                  <ts-source src="./samples/clean_fileid_9_*5-207811-A-35*_snr-19_tl-20_fileid_219.wav/fullsubnetplus_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="CRN">
+                                  <ts-source src="./samples/clean_fileid_9_*5-207811-A-35*_snr-19_tl-20_fileid_219.wav/crn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN">
+                                <ts-source src="./samples/clean_fileid_9_*5-207811-A-35*_snr-19_tl-20_fileid_219.wav/discogan.mp3"></ts-source>
+                            </ts-track>
+                              <ts-track title="NoCoGAN">
+                                <ts-source src="./samples/clean_fileid_9_*5-207811-A-35*_snr-19_tl-20_fileid_219.wav/nocogan.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="FreqCodec-SE">
+                                <ts-source src="./samples/clean_fileid_9_*5-207811-A-35*_snr-19_tl-20_fileid_219.wav/freqcodec.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="SEANet">
+                                <ts-source src="./samples/clean_fileid_9_*5-207811-A-35*_snr-19_tl-20_fileid_219.wav/seanet.mp3"></ts-source>
+                            </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samples/clean_fileid_9_*5-207811-A-35*_snr-19_tl-20_fileid_219.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+
+                      </p>
+                      <h5>Item 7 (SNR: -5dB, Speaker: Female)</h5>
+                    <p>
+                    <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samples/clean_fileid_207_*1-21896-A-35*_snr-5_tl-20_fileid_831.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DCCRN"</sub> >
+                                  <ts-source src="./samples/clean_fileid_207_*1-21896-A-35*_snr-5_tl-20_fileid_831.wav/dccrn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DDAEC">
+                                <ts-source src="./samples/clean_fileid_207_*1-21896-A-35*_snr-5_tl-20_fileid_831.wav/ddaec_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="FullSubNet+">
+                                  <ts-source src="./samples/clean_fileid_207_*1-21896-A-35*_snr-5_tl-20_fileid_831.wav/fullsubnetplus_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="CRN">
+                                  <ts-source src="./samples/clean_fileid_207_*1-21896-A-35*_snr-5_tl-20_fileid_831.wav/crn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN">
+                                <ts-source src="./samples/clean_fileid_207_*1-21896-A-35*_snr-5_tl-20_fileid_831.wav/discogan.mp3"></ts-source>
+                            </ts-track>
+                              <ts-track title="NoCoGAN">
+                                <ts-source src="./samples/clean_fileid_207_*1-21896-A-35*_snr-5_tl-20_fileid_831.wav/nocogan.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="FreqCodec-SE">
+                                <ts-source src="./samples/clean_fileid_207_*1-21896-A-35*_snr-5_tl-20_fileid_831.wav/freqcodec.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="SEANet">
+                                <ts-source src="./samples/clean_fileid_207_*1-21896-A-35*_snr-5_tl-20_fileid_831.wav/seanet.mp3"></ts-source>
+                            </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samples/clean_fileid_207_*1-21896-A-35*_snr-5_tl-20_fileid_831.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+                     </p>
+                      <h5>Item 8 (SNR: -9dB, Speaker: Female)</h5>
+                    <p>
+                    <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samples/clean_fileid_52_*5-221568-A-22*_snr-9_tl-20_fileid_42.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DCCRN"</sub> >
+                                  <ts-source src="./samples/clean_fileid_52_*5-221568-A-22*_snr-9_tl-20_fileid_42.wav/dccrn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DDAEC">
+                                <ts-source src="./samples/clean_fileid_52_*5-221568-A-22*_snr-9_tl-20_fileid_42.wav/ddaec_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="FullSubNet+">
+                                  <ts-source src="./samples/clean_fileid_52_*5-221568-A-22*_snr-9_tl-20_fileid_42.wav/fullsubnetplus_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="CRN">
+                                  <ts-source src="./samples/clean_fileid_52_*5-221568-A-22*_snr-9_tl-20_fileid_42.wav/crn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN">
+                                <ts-source src="./samples/clean_fileid_52_*5-221568-A-22*_snr-9_tl-20_fileid_42.wav/discogan.mp3"></ts-source>
+                            </ts-track>
+                              <ts-track title="NoCoGAN">
+                                <ts-source src="./samples/clean_fileid_52_*5-221568-A-22*_snr-9_tl-20_fileid_42.wav/nocogan.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="FreqCodec-SE">
+                                <ts-source src="./samples/clean_fileid_52_*5-221568-A-22*_snr-9_tl-20_fileid_42.wav/freqcodec.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="SEANet">
+                                <ts-source src="./samples/clean_fileid_52_*5-221568-A-22*_snr-9_tl-20_fileid_42.wav/seanet.mp3"></ts-source>
+                            </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samples/clean_fileid_52_*5-221568-A-22*_snr-9_tl-20_fileid_42.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+                   
+                    </p>
+                      <h5>Item 9 (SNR: -4dB, Speaker: Female)</h5>
+                    <p>
+                     <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samples/clean_fileid_6_*1-56234-A-9*_snr-4_tl-20_fileid_717.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DCCRN"</sub> >
+                                  <ts-source src="./samples/clean_fileid_6_*1-56234-A-9*_snr-4_tl-20_fileid_717.wav/dccrn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DDAEC">
+                                <ts-source src="./samples/clean_fileid_6_*1-56234-A-9*_snr-4_tl-20_fileid_717.wav/ddaec_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="FullSubNet+">
+                                  <ts-source src="./samples/clean_fileid_6_*1-56234-A-9*_snr-4_tl-20_fileid_717.wav/fullsubnetplus_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="CRN">
+                                  <ts-source src="./samples/clean_fileid_6_*1-56234-A-9*_snr-4_tl-20_fileid_717.wav/crn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN">
+                                <ts-source src="./samples/clean_fileid_6_*1-56234-A-9*_snr-4_tl-20_fileid_717.wav/discogan.mp3"></ts-source>
+                            </ts-track>
+                              <ts-track title="NoCoGAN">
+                                <ts-source src="./samples/clean_fileid_6_*1-56234-A-9*_snr-4_tl-20_fileid_717.wav/nocogan.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="FreqCodec-SE">
+                                <ts-source src="./samples/clean_fileid_6_*1-56234-A-9*_snr-4_tl-20_fileid_717.wav/freqcodec.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="SEANet">
+                                <ts-source src="./samples/clean_fileid_6_*1-56234-A-9*_snr-4_tl-20_fileid_717.wav/seanet.mp3"></ts-source>
+                            </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samples/clean_fileid_6_*1-56234-A-9*_snr-4_tl-20_fileid_717.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+                  </p>
+                      <h5>Item 10 (SNR: -8dB, Speaker: Male)</h5>
+                    <p>
+<div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samples/clean_fileid_300_*3-152020-A-36*_snr-8_tl-20_fileid_501.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DCCRN"</sub> >
+                                  <ts-source src="./samples/clean_fileid_300_*3-152020-A-36*_snr-8_tl-20_fileid_501.wav/dccrn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DDAEC">
+                                <ts-source src="./samples/clean_fileid_300_*3-152020-A-36*_snr-8_tl-20_fileid_501.wav/ddaec_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="FullSubNet+">
+                                  <ts-source src="./samples/clean_fileid_300_*3-152020-A-36*_snr-8_tl-20_fileid_501.wav/fullsubnetplus_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="CRN">
+                                  <ts-source src="./samples/clean_fileid_300_*3-152020-A-36*_snr-8_tl-20_fileid_501.wav/crn_speech_mt_lowsnr_crm.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN">
+                                <ts-source src="./samples/clean_fileid_300_*3-152020-A-36*_snr-8_tl-20_fileid_501.wav/discogan.mp3"></ts-source>
+                            </ts-track>
+                              <ts-track title="NoCoGAN">
+                                <ts-source src="./samples/clean_fileid_300_*3-152020-A-36*_snr-8_tl-20_fileid_501.wav/nocogan.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="FreqCodec-SE">
+                                <ts-source src="./samples/clean_fileid_300_*3-152020-A-36*_snr-8_tl-20_fileid_501.wav/freqcodec.mp3"></ts-source>
+                            </ts-track>
+                             </ts-track>
+                              <ts-track title="SEANet">
+                                <ts-source src="./samples/clean_fileid_300_*3-152020-A-36*_snr-8_tl-20_fileid_501.wav/seanet.mp3"></ts-source>
+                            </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samples/clean_fileid_300_*3-152020-A-36*_snr-8_tl-20_fileid_501.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+
+
+                    </p>
+
+
+
+    <div id="VCTK Dataset"></div>
+    <h2>2. VCTK Dataset</h2>
+                        
+                    </p>
+                    <h5>Item 1</h5>
+                    <p>
+                        <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samplesvctk/p232_160.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN"</sub> >
+                                  <ts-source src="./samplesvctk/p232_160.wav/discogan.mp3"></ts-source>
+                              </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samplesvctk/p232_160.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+
+                    </p>
+                    <h5>Item 2</h5>
+                    <p>
+                         <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samplesvctk/p232_234.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN"</sub> >
+                                  <ts-source src="./samplesvctk/p232_234.wav/discogan.mp3"></ts-source>
+                              </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samplesvctk/p232_234.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+
+                    </p>
+                    <h5>Item 3 </h5>
+                    <p>
+                    <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samplesvctk/p232_246.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN"</sub> >
+                                  <ts-source src="./samplesvctk/p232_246.wav/discogan.mp3"></ts-source>
+                              </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samplesvctk/p232_246.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+
+                    </p>
+                    <h5>Item 4 </h5>
+                    <p>
+                            <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samplesvctk/p232_301.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN"</sub> >
+                                  <ts-source src="./samplesvctk/p232_301.wav/discogan.mp3"></ts-source>
+                              </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samplesvctk/p232_301.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+                    </p>
+                      <h5>Item 5</h5>
+                    <p>
+                   <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samplesvctk/p232_305.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN"</sub> >
+                                  <ts-source src="./samplesvctk/p232_305.wav/discogan.mp3"></ts-source>
+                              </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samplesvctk/p232_305.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+                    </p>
+                      <h5>Item 6 </h5>
+                    <p>
+                    <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samplesvctk/p257_313.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN"</sub> >
+                                  <ts-source src="./samplesvctk/p257_313.wav/discogan.mp3"></ts-source>
+                              </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samplesvctk/p257_313.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+                              
+
+                      </p>
+                      <h5>Item 7</h5>
+                    <p>
+                     <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samplesvctk/p257_323.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN"</sub> >
+                                  <ts-source src="./samplesvctk/p257_323.wav/discogan.mp3"></ts-source>
+                              </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samplesvctk/p257_323.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+                     </p>
+                      <h5>Item 8</h5>
+                    <p>
+                     <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samplesvctk/p257_353.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN"</sub> >
+                                  <ts-source src="./samplesvctk/p257_353.wav/discogan.mp3"></ts-source>
+                              </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samplesvctk/p257_353.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+                   
+                    </p>
+                      <h5>Item 9</h5>
+                    <p>
+                     <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samplesvctk/p257_408.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN"</sub> >
+                                  <ts-source src="./samplesvctk/p257_408.wav/discogan.mp3"></ts-source>
+                              </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samplesvctk/p257_408.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+                  </p>
+                      <h5>Item 10 </h5>
+                    <p>
+                        <div class="choir">
+                              <ts-track title="Noisy">
+                                  <ts-source src="./samplesvctk/p257_429.wav/noisy.mp3"></ts-source>
+                              </ts-track>
+                              <ts-track title="DisCoGAN"</sub> >
+                                  <ts-source src="./samplesvctk/p257_429.wav/discogan.mp3"></ts-source>
+                              </ts-track>
+                            <ts-track title="Clean">
+                                <ts-source src="./samplesvctk/p257_429.wav/clean.mp3"></ts-source>
+                            </ts-track>
+                          </div>
+
+
+                    </p>
+
+
+                        </p>
+                        </div></p>
+                        <figure></figure>
+                        <p></p>
+                    
+
+ <div class="text">
+     <hr> </hr> 
+     <hr> </hr> 
+                        <h2>Conditions of Use</h2>
+                        <p> 1.Fraunhofer IIS generated this sound material based on material that is publicly available on VCTK dataset, <a href="https://github.com/microsoft/DNS-Challenge"> DNS Challenge </a> and <a href="https://github.com/karolpiczak/ESC-50"> ESC-50 </a>. </p>
+                         <p> 2.The content has been processed using generally accepted rules of technology as well as scientific care, but not actual attainment of any expected feature. </p>
+     <p> 3. With the exception of willful intent or gross negligence, Fraunhofer IIS shall not be liable that Open Source software or other third-party software is free from any error or claim or its fitness for a particular purpose, even if included within the Sound Material. </p>
+<p> 4.The Sound Material shall only be used for testing and appreciating noise reduction techniques and shall not be copied, publicly transmitted, distributed, lent or modified for any other reason. </p>
+     <p> 5.No representation or warranties are made or implied regarding the accuracy, non-infringement, or fitness for a particular purpose of Sound Material. </p>
+     <p> 6.Copyright and Permission notice shall be duplicated whenever Sound Material is copied, distributed, or publicly transmitted. </p>
+     <p> 6.The Sound material cannot be distributed with charge.   <a href="#Methods"> --> Go to Top</a> </p>
+
+
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/trackswitch.js"></script>
+    <script type="text/javascript">
+    var settings = {
+    onlyradiosolo: true,
+    repeat: true,
+};
+        jQuery(document).ready(function() {
+            jQuery(".choir").trackSwitch(settings); // All other players are default
+            jQuery(".piano").trackSwitch(settings);
+            jQuery(".guitar").trackSwitch(settings);
+            jQuery(".organ").trackSwitch(settings);
+        });
+    </script>
+</body>
+
+</html>
