@@ -20,20 +20,21 @@
             <div class="row">
                 <div class="text">
                     <div class="intro", style="text-align: center">
-                        <h1 class="text-center"><br><br>GAN-Based Speech Enhancement for Low SNR Using Latent Feature Conditioning<br></h1>
+                        <h1 class="text-center"><br><br>Leveraging Discriminative Latent Representations for Conditioning GAN-Based Speech Enhancement<br></h1>
                         <h5 class="text-center"><i> Shrishti Saha Shetu, Emanu&#235;l A. P. Habets, Andreas Brendel</i> <br><br></h5>
                         <a href="https://www.iis.fraunhofer.de/en/ff/amm.html"> <img src="./assets/img/fhg_iis_logo.png" alt="FhG_IIS" width="240" height="77" ></img></a>
-                        <h5 class="text-center"> Fraunhofer IIS, Am Wolfsmantel 33, 91058 Erlangen, Germany</h5>
+                        <h5 class="text-center"> International Audio Laboratories Erlangen, Am Wolfsmantel 33, 91058 Erlangen, Germany</h5>
                         <p class="text-center"><i>{shrishti.saha.shetu, emanuel.habets, andreas.brendel}@iis.fraunhofer.de</i> <br></p>
                         <p class="text-center"> </p>
                     </div>
                     <div class="text">
                         <h2>Abstract</h2>
-                        <p class="text-justify"> Enhancing speech quality under adverse SNR conditions remains a significant challenge for discriminative deep neural network (DNN)-based approaches. 
-                            In this work, we propose DisCoGAN, which is a time-frequency-domain generative adversarial network (GAN) conditioned by the latent features of a discriminative model pre-trained for 
-                            speech enhancement in low SNR scenarios. Our proposed method achieves superior performance compared to state-of-the-arts discriminative methods and also surpasses end-to-end (E2E)
-                            trained GAN models. We also investigate the impact of various configurations for conditioning the proposed GAN model with the discriminative model and 
-                            assess their influence on enhancing speech quality.<br></p>
+                        <p class="text-justify"> Generative speech enhancement methods based on generative adversarial networks (GANs) and diffusion models have shown promising results in various speech enhancement (SE) tasks. 
+                            However, their performance in very low signal-to-noise ratio (SNR) scenarios remains underexplored, even though these conditions remain challenging for most SE methods, including state-of-the-art discriminative and generative methods. 
+                            In this work, we propose a method that leverages latent features extracted from discriminative speech enhancement models as generic conditioning features to improve GAN-based speech enhancement.
+                            The proposed method, referred to as DisCoGAN, demonstrates performance improvements over baseline models, particularly in low-SNR scenarios, while also maintaining competitive or superior performance in high-SNR conditions and on real-world recordings. 
+                            We also conduct a comprehensive evaluation of conventional GAN-based architectures,  including GANs trained end-to-end, GANs as a first processing stage, and post-filtering GANs, as well as discriminative models under low-SNR conditions. 
+                            We show that DisCoGAN consistently outperforms existing methods. Finally, we present an ablation study that investigates the contributions of individual components within DisCoGAN and analyzes the impact of the discriminative conditioning method on overall performance..<br></p>
                         <figure></figure>
                         <p></p>
                     </div>
@@ -44,7 +45,7 @@
 
                             Following you can find some processed samples with different Methods:
                             <h2>1. Low SNR Dataset <a href="#LowSNR"> --> Go to the samples</a></h2> 
-                            <h2>2. VCTK Dataset <a href="#VCTK Dataset"> --> Go to the samples</a></h2> 
+                            <h2>2. High SNR Dataset <a href="#VCTK Dataset"> --> Go to the samples</a></h2> 
 
                           <br>
             <div id="LowSNR"></div>
